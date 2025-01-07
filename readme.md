@@ -91,4 +91,4 @@ On this routes
 
 ## Notes
 
-The usage of the provided template is mandatory. Submissions not written in this template, will not be reviewed. Writing tests is mandatory. Please fork this repository and invite engineering@kelmaridholdings.com and send email with the user details to your assessment. 
+The usage of the provided template is mandatory. Submissions not written in this template, will not be reviewed. Writing tests is mandatory. Please fork this repository and invite engineering@squareme.app and send email with the user details to your assessment. 
