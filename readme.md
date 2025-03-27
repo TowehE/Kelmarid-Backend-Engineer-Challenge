@@ -18,7 +18,7 @@ The usage of the following packages is mandatory:
 - Typescript
 - Testing
 
-To store your data you can either use a sqllite database file, or use a local Postgres database (preferred).
+To store your data you can either use a sqllite database file, or use a local Postgres(14 max) database (preferred).
 
   
 
