@@ -15,9 +15,24 @@
 
 import Logger from '@ioc:Adonis/Core/Logger'
 import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
+import { Exception } from '@adonisjs/core/build/standalone'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
   constructor() {
     super(Logger)
+  }
+}
+
+
+export class ValidationException extends Exception {
+  constructor(message: string) {
+    super(message, 400)
+  }
+  
+  // This is the property that AdonisJS exception handler will check
+  public async handle(error: this, { response }) {
+    response.status(error.status).send({
+      message: error.message
+    })
   }
 }

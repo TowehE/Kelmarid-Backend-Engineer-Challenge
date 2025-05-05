@@ -1,0 +1,40 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3333:3333"
+    depends_on:
+      - postgres
+    environment:
+      - PORT=3333
+      - HOST=0.0.0.0
+      - NODE_ENV=development
+      - APP_KEY=uL9MBptA5t-ndObHnHeJo928P1uXDdLY
+      - DRIVE_DISK=local
+      - DB_CONNECTION=pg
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_USER=lucid
+      - PG_PASSWORD=123456
+      - PG_DB_NAME=lucid
+    volumes:
+      - .:/app
+      - /app/node_modules
+    # Use AdonisJS development server with watch mode
+    command: npm run dev
+
+  postgres:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=lucid
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=lucid
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

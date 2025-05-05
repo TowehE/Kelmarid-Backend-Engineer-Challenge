@@ -20,6 +20,32 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
+// public routes
+Route.group(() => {
+  // User authentication routes
+  Route.post('/register', 'AuthController.register')
+  Route.post('/login', 'AuthController.login')
+
+  Route.get('/hello', async ({ response }) => {
+    return response.status(200).json({ hello: 'world' })
+  })
+}).prefix('api')
+
+// Add root route to match the test
+Route.get('/', async ({ response }) => {
+  return response.status(200).json({ hello: 'world' })
 })
+// protected routes
+Route.group(() => {
+  // Auth routes
+  Route.post('/logout', 'AuthController.logout')
+
+  // Author routes
+   Route.resource('authors', 'AuthorsController').apiOnly()
+
+  //  Book routes
+  Route.resource('books', 'BooksController').apiOnly()
+
+})
+  .prefix('api')
+  .middleware('auth')
