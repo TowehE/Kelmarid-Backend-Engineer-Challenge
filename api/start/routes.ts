@@ -23,7 +23,7 @@ import Route from '@ioc:Adonis/Core/Route'
 // public routes
 Route.group(() => {
   // User authentication routes
-  Route.post('/register', 'AuthController.register')
+  Route.post('/createuser', 'AuthController.register')
   Route.post('/login', 'AuthController.login')
 
   Route.get('/hello', async ({ response }) => {
@@ -31,7 +31,7 @@ Route.group(() => {
   })
 }).prefix('api')
 
-// Add root route to match the test
+// Root route 
 Route.get('/', async ({ response }) => {
   return response.status(200).json({ hello: 'world' })
 })
@@ -48,4 +48,4 @@ Route.group(() => {
 
 })
   .prefix('api')
-  .middleware('auth')
+  .middleware('auth:api')

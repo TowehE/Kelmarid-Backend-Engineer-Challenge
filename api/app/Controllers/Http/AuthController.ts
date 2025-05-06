@@ -30,21 +30,25 @@ return response.created({
 })
 }
 
+
 public async login({ request, response, auth }: HttpContextContract) {
-   const { username, password } = await request.validate(LoginValidator)
-      
-    const user = await User.query()
-     .whereRaw('LOWER(username) = LOWER(?)', [username])
-     .first()
+  const { username, password } = await request.validate(LoginValidator)
 
-if (!user) {
-  return response.unauthorized({ message: 'Username is not registered' })
-}
+  console.log('Password from request:', password); // Log the password from the request
 
+  const user = await User.query()
+    .whereRaw('LOWER(username) = LOWER(?)', [username])
+    .first()
 
+  if (!user) {
+    return response.unauthorized({ message: 'Username is not registered' })
+  }
+
+ 
   // Verify password
   const isPasswordValid = await Hash.verify(user.password, password)
-    
+
+ 
   if (!isPasswordValid) {
     return response.unauthorized({ message: 'Invalid password' })
   }
@@ -64,6 +68,7 @@ if (!user) {
     token: token
   })
 }
+
 
 
 

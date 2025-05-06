@@ -25,4 +25,6 @@ export default class Book extends BaseModel {
     pivotTable: 'author_books',
   })
   public authors: ManyToMany<typeof Author>
+
 }
+

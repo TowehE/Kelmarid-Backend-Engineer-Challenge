@@ -10,4 +10,3 @@ export function validateExtraFields(ctx: HttpContextContract, allowedFields: str
     throw new ValidationException(`Invalid field: ${extraFields.join(', ')}`)
   }
 }
-

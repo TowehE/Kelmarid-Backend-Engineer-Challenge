@@ -1,94 +1,202 @@
+# AdonisJS API Backend Challenge
 
-#  Kelmarid Backend Engineer Challenge
+This project is an AdonisJS API with authentication for managing authors and books.
 
-  
+## Features
 
-The goal of this challenge if to create an AdonisJsAPI backend matching the objectives down below.
+- User authentication with JWT tokens
+- CRUD operations for authors and books
+- Many-to-many relationship between authors and books
+- Search functionality for both authors and books
+- Pagination for list endpoints
+- Complete test suite
 
-  
+## Requirements
 
-To bootstrap this project, we've used a basic [AdonisJs](https://docs.adonisjs.com/guides/introduction) template. There is a Dockerfile available in case you want to work with Docker during development, but this is not a requirement.
+- Node.js 14+ or Docker
+- PostgreSQL 14 (or SQLite as fallback)
 
-  
+## Getting Started
 
-The usage of the following packages is mandatory:
+### Option 1: Local Setup
 
-- AdonisJs 
-- @adonisjs/lucid
-- Typescript
-- Testing
+1. Clone the repository
 
-To store your data you can either use a sqllite database file, or use a local Postgres(14 max) database (preferred).
+2. Install dependencies
+```bash
+npm install
+```
 
-  
+3. Configure environment variables
+```bash
+cp .env.example .env
+```
 
-If you choose to use a Postgres database, please provide a seed-file with some dummy data and a migration file to setup the database schema.
+4. Generate application key
+```bash
+node ace generate:key
+```
+Update the .env file with the generated key.
 
-  
+5. Setup database
+   - For SQLite:
+     ```bash
+     mkdir -p database
+     touch database/database.sqlite
+     ```
+   - For PostgreSQL:
+     Make sure your PostgreSQL server is running and update the database credentials in the .env file.
 
-In case you use sqllite, provide the database file.
+6. Run migrations and seed the database
+```bash
+node ace migration:run
+node ace db:seed
+```
 
-  
+7. Start the development server
+```bash
+node ace serve --watch
+```
 
-## Objectives
+The API will be available at http://localhost:3333
 
-  
+### Option 2: Using Docker
 
-Create a username/password protected API that authenticates API requests using Bearer tokens (not session tokens). Store the user credentials in your database and allow us to sign in using the a frontend/API call (please provide the credentials for one user, no need to create functionality to create users). All routes are to be protected.
+1. Clone the repository
 
-  
+2. Build and start the containers
+```bash
+docker-compose up -d
+```
 
-### Data schema
+3. Setup the database
+```bash
+docker-compose exec api sh -c "chmod +x ./setup-db.sh && ./setup-db.sh"
+```
 
-  
+The API will be available at http://localhost:3333
 
-The portal will be used to manage data about authors and their books. An author can have zero or more books, a book must have at least one author. An author just has a required name field. Books have a required name field and a required page numbers field.
+## API Documentation
 
-### User Routes
- On this routes:
-  - Create User: a new user should be created with the following fields
-     - Username
-     - Password
+### Authentication
 
-  - Login User: a endpoint to login in existing users using the following fields
-    - Username
-    - Password
+#### Register a new user
+```
+POST /api/auth/register
+Body: { "username": "your_username", "password": "your_password" }
+```
 
-# 
-#### Authors Routes
+#### Login
+```
+POST /api/auth/login
+Body: { "username": "your_username", "password": "your_password" }
+```
 
-On this routes:
- - Create Author: this route creates new authors with the following fields
-   - Name  
+#### Logout
+```
+POST /api/logout
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+```
 
-# 
- - Fetch Author:  a paginated list of authors with following field and should be searchable
-    - Name field
-    - Number of Books (Calculated from DB)
-#
- - Edit Author: should be able to edit the following
-    - Name
-#
-  - Delete Author: delete an author 
+### Authors
 
-  
+#### List authors
+```
+GET /api/authors
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+Query params: page, per_page, search
+```
 
-#### Books
+#### Get author by ID
+```
+GET /api/authors/:id
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+```
 
-On this routes
+#### Create author
+```
+POST /api/authors
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+Body: { "name": "Author Name" }
+```
 
-- Fetch Books :  a paginated list of books with following field and should be searchable
-    - Name (Searchable)
-    -  Author(s) name (Searchable)
-	-  Number of pages
+#### Update author
+```
+PUT /api/authors/:id
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+Body: { "name": "New Author Name" }
+```
 
-#
+#### Delete author
+```
+DELETE /api/authors/:id
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+```
 
- - Edit Book: should be able to edit the following
-	- Book Name
+### Books
 
-  
+#### List books
+```
+GET /api/books
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+Query params: page, per_page, book_name, author_name
+```
 
-## Notes
+#### Get book by ID
+```
+GET /api/books/:id
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+```
 
-The usage of the provided template is mandatory. Submissions not written in this template, will not be reviewed. Writing tests is mandatory. Please fork this repository and invite engineering@squareme.app and send email with the user details to your assessment. 
+#### Create book
+```
+POST /api/books
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+Body: { 
+  "name": "Book Name", 
+  "pageNumbers": 250, 
+  "authorIds": [1, 2] 
+}
+```
+
+#### Update book
+```
+PUT /api/books/:id
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+Body: { 
+  "name": "New Book Name",
+  "pageNumbers": 300,
+  "authorIds": [1, 3]
+}
+```
+
+#### Delete book
+```
+DELETE /api/books/:id
+Headers: { "Authorization": "Bearer YOUR_TOKEN" }
+```
+
+## Demo User
+
+For testing purposes, you can use the following credentials:
+
+- Username: admin
+- Password: password123
+
+## Running Tests
+
+Run the test suite with:
+
+```bash
+node ace test
+```
+
+## Project Structure
+
+- `app/Controllers` - API controllers
+- `app/Models` - Database models
+- `app/Validators` - Request validation schemas
+- `database/migrations` - Database migrations
+- `database/seeders` - Database seeders
+- `start/routes.ts` - API routes definition
+- `tests` - Test files

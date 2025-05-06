@@ -11,15 +11,12 @@ export  class CreateAuthorValidator  {
   public schema = schema.create({
     name: schema.string({ trim:true },[
       rules.minLength(3),
-      // rules.unique({ table: 'authors', column: 'name' })
-
     ])
   })
 
   public messages: CustomMessages = {
     'name.required': 'Author name is required',
     'name.minLength': 'Author name must be at least 2 characters',
-    // 'name.unique': 'An author with this name already exists for this user',
     
   }
 

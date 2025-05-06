@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, computed, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Book from './Book'
+import User from './User'
 
 export default class Author extends BaseModel {
   @column({ isPrimary: true })
@@ -9,8 +10,8 @@ export default class Author extends BaseModel {
   @column()
   public name: string
 
-  @column()
-  public userId: number
+  @column({ columnName: 'user_id' })
+  public user_id: number
 
 
   @column.dateTime({ autoCreate: true })
@@ -23,4 +24,15 @@ export default class Author extends BaseModel {
     pivotTable: 'author_books',
   })
   public books: ManyToMany<typeof Book>
-}
+
+
+   @belongsTo(() => User, {
+      foreignKey: 'user_id',
+    })
+    public user: BelongsTo<typeof User>
+
+    @computed ()
+    public get books_count() {
+      return this.$extras.books_count ?? 0
+    }
+  }
