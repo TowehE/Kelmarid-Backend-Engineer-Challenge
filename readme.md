@@ -14,7 +14,7 @@ This project is an AdonisJS API with authentication for managing authors and boo
 ## Requirements
 
 - Node.js 14+ or Docker
-- PostgreSQL 14 (or SQLite as fallback)
+- PostgreSQL 14 
 
 ## Getting Started
 
@@ -39,11 +39,6 @@ node ace generate:key
 Update the .env file with the generated key.
 
 5. Setup database
-   - For SQLite:
-     ```bash
-     mkdir -p database
-     touch database/database.sqlite
-     ```
    - For PostgreSQL:
      Make sure your PostgreSQL server is running and update the database credentials in the .env file.
 
@@ -58,7 +53,7 @@ node ace db:seed
 node ace serve --watch
 ```
 
-The API will be available at http://localhost:3333
+The API will be available at http://localhost:3333/api
 
 ### Option 2: Using Docker
 
@@ -180,8 +175,9 @@ Headers: { "Authorization": "Bearer YOUR_TOKEN" }
 
 For testing purposes, you can use the following credentials:
 
-- Username: admin
-- Password: password123
+- Username: Shyali
+- Password: Testing123@!
+
 
 ## Running Tests
 
@@ -190,13 +186,3 @@ Run the test suite with:
 ```bash
 node ace test
 ```
-
-## Project Structure
-
-- `app/Controllers` - API controllers
-- `app/Models` - Database models
-- `app/Validators` - Request validation schemas
-- `database/migrations` - Database migrations
-- `database/seeders` - Database seeders
-- `start/routes.ts` - API routes definition
-- `tests` - Test files
