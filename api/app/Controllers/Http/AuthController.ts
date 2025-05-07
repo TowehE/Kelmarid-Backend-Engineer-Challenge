@@ -34,8 +34,6 @@ return response.created({
 public async login({ request, response, auth }: HttpContextContract) {
   const { username, password } = await request.validate(LoginValidator)
 
-  console.log('Password from request:', password); // Log the password from the request
-
   const user = await User.query()
     .whereRaw('LOWER(username) = LOWER(?)', [username])
     .first()

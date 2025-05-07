@@ -30,3 +30,14 @@ EXPOSE 3333
 
 # Start app with the correct path (adjust if needed)
 CMD ["node", "./build/server.js"]
+
+
+
+
+
+
+
+
+
+
+

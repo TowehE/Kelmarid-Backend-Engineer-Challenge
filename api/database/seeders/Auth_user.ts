@@ -8,11 +8,11 @@ export default class UserSeeder extends BaseSeeder {
   public async run() {
     const now = DateTime.now()
     
-    // Check for existing users to avoid duplicates
+    // Check for existing users 
     const existingUsernames = await User.query().select('username')
     const existingUsernameSet = new Set(existingUsernames.map(user => user.username.toLowerCase()))
     
-    // Define users we want to create
+    // Define users to create
     const usersToCreate = [
       {
         username: 'Shyali',
@@ -44,7 +44,7 @@ export default class UserSeeder extends BaseSeeder {
       await User.createMany(uniqueUsers)
       console.log(`${uniqueUsers.length} new seed users created successfully!`)
     } else {
-      console.log('No new users to seed - all already exist')
+      console.log('No new users to seed, all already exist')
     }
     
     // Log the number of users for verification

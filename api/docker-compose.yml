@@ -1,5 +1,7 @@
+version: '3.8'
 services:
   app:
+    container_name: kelmarid-backend-app
     build: 
       context: .
       dockerfile: Dockerfile
@@ -22,7 +24,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    # Use AdonisJS development server with watch mode
     command: npm run dev
 
   postgres:
