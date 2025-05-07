@@ -55,16 +55,11 @@ The API will be available at http://localhost:3333/api
 
 2. Build and start the containers
 ```bash
-docker-compose up -d
-```
+docker-compose -p kelmarid-backend up --build
 
-3. Setup the database
-```bash
-docker-compose exec api sh -c "chmod +x ./setup-db.sh && ./setup-db.sh"
 ```
 
 The API will be available at http://localhost:3333
-LIVE API: https://kelmarid-be.onrender.com But TO SET IT UP YPU NEED TO ADD SSL TO YOUR 
 
 ## Demo User
 
