@@ -36,13 +36,13 @@ cp .env.example .env
    - For PostgreSQL:
      Make sure your PostgreSQL server is running and update the database credentials in the .env file.
 
-6. Run migrations and seed the database
+5. Run migrations and seed the database
 ```bash
 node ace migration:run
 node ace db:seed
 ```
 
-7. Start the development server
+6. Start the development server
 ```bash
 node ace serve --watch
 ```
@@ -59,7 +59,14 @@ docker-compose -p kelmarid-backend up --build
 
 ```
 
-The API will be available at http://localhost:3333
+Live Demo
+For a live demo, you can use the API hosted at:
+
+Live URL: https://kelmarid-be.onrender.com
+
+Postman Documentation
+You can find the Postman API Documentation for this project at the following link:
+https://documenter.getpostman.com/view/31029158/2sB2j7dpqw
 
 ## Demo User
 
