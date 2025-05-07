@@ -33,7 +33,7 @@ Route.group(() => {
 
 // Root route 
 Route.get('/', async ({ response }) => {
-  return response.status(200).json({ hello: 'world' })
+  return response.status(200).json({ hello: 'Kelmarid backend assesment is up and running' })
 })
 // protected routes
 Route.group(() => {
