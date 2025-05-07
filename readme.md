@@ -32,13 +32,7 @@ npm install
 cp .env.example .env
 ```
 
-4. Generate application key
-```bash
-node ace generate:key
-```
-Update the .env file with the generated key.
-
-5. Setup database
+4. Setup database
    - For PostgreSQL:
      Make sure your PostgreSQL server is running and update the database credentials in the .env file.
 
@@ -70,106 +64,7 @@ docker-compose exec api sh -c "chmod +x ./setup-db.sh && ./setup-db.sh"
 ```
 
 The API will be available at http://localhost:3333
-
-## API Documentation
-
-### Authentication
-
-#### Register a new user
-```
-POST /api/auth/register
-Body: { "username": "your_username", "password": "your_password" }
-```
-
-#### Login
-```
-POST /api/auth/login
-Body: { "username": "your_username", "password": "your_password" }
-```
-
-#### Logout
-```
-POST /api/logout
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-```
-
-### Authors
-
-#### List authors
-```
-GET /api/authors
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-Query params: page, per_page, search
-```
-
-#### Get author by ID
-```
-GET /api/authors/:id
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-```
-
-#### Create author
-```
-POST /api/authors
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-Body: { "name": "Author Name" }
-```
-
-#### Update author
-```
-PUT /api/authors/:id
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-Body: { "name": "New Author Name" }
-```
-
-#### Delete author
-```
-DELETE /api/authors/:id
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-```
-
-### Books
-
-#### List books
-```
-GET /api/books
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-Query params: page, per_page, book_name, author_name
-```
-
-#### Get book by ID
-```
-GET /api/books/:id
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-```
-
-#### Create book
-```
-POST /api/books
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-Body: { 
-  "name": "Book Name", 
-  "pageNumbers": 250, 
-  "authorIds": [1, 2] 
-}
-```
-
-#### Update book
-```
-PUT /api/books/:id
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-Body: { 
-  "name": "New Book Name",
-  "pageNumbers": 300,
-  "authorIds": [1, 3]
-}
-```
-
-#### Delete book
-```
-DELETE /api/books/:id
-Headers: { "Authorization": "Bearer YOUR_TOKEN" }
-```
+LIVE API: https://kelmarid-be.onrender.com But TO SET IT UP YPU NEED TO ADD SSL TO YOUR 
 
 ## Demo User
 
